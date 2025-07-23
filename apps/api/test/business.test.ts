@@ -4,6 +4,9 @@ import businessRoutes from '../src/routes/business';
 
 test('POST /business', async () => {
   const app = Fastify();
+  app.decorate('db', {
+    query: async () => ({ rows: [] })
+  } as any);
   await app.register(businessRoutes);
   const res = await app.inject({
     method: 'POST',
